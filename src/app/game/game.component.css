@@ -2,13 +2,14 @@
 {
     border: 1px;
 }
-    .gameboard
-    {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+
+.gameboard
+{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
         .player-one{
 
@@ -22,22 +23,24 @@
         .gamefield{
             max-width: 300px;
         }
-            .subfield{
-                cursor: pointer;
-                height: 100px;
-                width:100px;
-                border: 1px solid white;
+        .subfield
+        {
+            cursor: pointer;
+            height: 100px;
+            width:100px;
+            border: 1px solid white;
+
+            &.player-one 
+            {
+                background:  rgb(83, 163, 83);
             }
             
-                .player-one {
-                    background:  rgb(83, 163, 83);
-                }
-                
-                .player-two {
-                    background:    rgb(230, 109, 109);
-                
-
+            &.player-two 
+            {
+                background:    rgb(230, 109, 109);
             }
+        }
+ 
         
     
 

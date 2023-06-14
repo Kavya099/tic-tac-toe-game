@@ -18,9 +18,16 @@ export class Gamelogic {
         [1, 0, 0, 1, 0, 0, 1, 0, 0],
         [0, 1, 0, 0, 1, 0, 0, 1, 0],
         [0, 0, 1, 0, 0, 1, 0, 0, 1],
-        [0, 0, 1, 0, 0, 1, 0, 0, 1],
         [0, 0, 1 ,0, 1, 0, 1, 0, 0],
         [1, 0, 0, 0, 1, 0, 0, 0, 1],
+        [0, 0, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 0, 1, 1, 0, 1, 0, 0],
+        [1, 1, 0, 0, 1, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0, 1, 0, 0, 1],
+        [0, 1, 0, 0, 1, 1, 0, 1, 0],
+        [1, 0, 1, 1, 0, 0, 1, 1, 0],
+        [0, 0, 1, 0, 1, 0, 1, 1, 0]
     ];
 
     winSituationsTwo :Array< Array <number>> = [
@@ -32,9 +39,16 @@ export class Gamelogic {
         [2, 0, 0, 2, 0, 0, 2, 0, 0],
         [0, 2, 0, 0, 2, 0, 0, 2, 0],
         [0, 0, 2, 0, 0, 2, 0, 0, 2],
-        [0, 0, 2, 0, 0, 2, 0, 0, 2],
         [0, 0, 2 ,0, 2, 0, 2, 0, 0],
         [2, 0, 0, 0, 2, 0, 0, 0, 2],
+        [0, 0, 2, 2, 2, 2, 0, 0, 0],
+        [0, 0, 2, 0, 2, 2, 2, 0, 2],
+        [2, 0, 0, 2, 2, 0, 2, 0, 0],
+        [2, 2, 0, 0, 2, 0, 0, 2, 0],
+        [2, 0, 2, 0, 0, 2, 0, 0, 2],
+        [0, 2, 0, 0, 2, 2, 0, 2, 0],
+        [2, 0, 2, 2, 0, 0, 2, 2, 0],
+        [0, 0, 2, 0, 2, 0, 2, 2, 0],
 
     ];
 
@@ -58,13 +72,13 @@ export class Gamelogic {
     
     
     randomPlayerStart(): number{
-        const startPlayer = Math.floor(Math.random()* 2)* 1;
+        const startPlayer = Math.floor(Math.random() * 2) + 1;
         return startPlayer;  
     }
     
     
     setField(position: number,value: number): void{
-    this.gamefield[position]= value;
+    this.gamefield[position]= value;                   /* setting box value to player 1 or player 2*/
     }
     
     getPlayercolorClass() : string {
@@ -75,10 +89,10 @@ export class Gamelogic {
     
     changePlayer(): void{
         
-        this.currentTurn = (this.currentTurn === 2)? 1: 2;
+        this.currentTurn = (this.currentTurn === 2) ? 1 : 2;
     }
 
-    arrayEquals (a:Array<any>,b:Array<any>):boolean{
+    arrayEquals (a:Array<any>,b:Array<any>):boolean{          /*check position value of two array are same & return true*/
         return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((value, index)=>value === b[index]);
 
     }
@@ -88,11 +102,11 @@ export class Gamelogic {
         let isWinner = false;
 
         const checkarray=(this.currentTurn === 1)?this.winSituationsOne : this.winSituationsTwo;
-        const currentarray: number[]=[];
+        const currentarray: number[]=[];                   /*creating new array*/
 
-        this.gamefield.forEach( (subfield, index) => {
+        this.gamefield.forEach( (subfield, index) => {    /*iterating all the game fields*/
 
-            if(subfield !== this.currentTurn){
+            if(subfield !== this.currentTurn){      /*for each player getting the no in console each time not 2nd player*/
                 currentarray[index] = 0;
 
             }
@@ -104,7 +118,7 @@ export class Gamelogic {
         }
         );
 
-        checkarray.forEach((checkfield,checkindex)=>{
+        checkarray.forEach((checkfield,checkindex)=>{   /*check checkarray and the currentarray*/
             if(this.arrayEquals(checkfield,currentarray))
             {
                 isWinner = true;
@@ -132,12 +146,13 @@ export class Gamelogic {
     
     
     async checkGameEndFull(): Promise <boolean> {
-    let isfull = true;
-    if(this.gamefield.includes(0)){
+    let isfull = true; /*isfull a variable*/
+    if(this.gamefield.includes(0))
+    {
             isfull = false;
-        }
-        
-        if(isfull)
+    }
+    
+    if(isfull)
         
         {
             this.gameEnd();
@@ -148,6 +163,7 @@ export class Gamelogic {
             return false;
         }
     }
+    
     
     
     gameEnd()

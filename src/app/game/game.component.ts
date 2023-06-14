@@ -18,8 +18,8 @@ export class GameComponent implements OnInit {
   startGame(): void{
 
     this.game.gameStart();
-    const currentPlayer = "Current turn: Player:" +this.game.currentTurn;
-    const information = document.querySelector('.current-status');
+    const currentPlayer = "Current turn: Player:" + this.game.currentTurn;
+    const information = document.querySelector('.current-status'); /* to get current player in page*/
     information!.innerHTML= currentPlayer;
 
 
@@ -30,18 +30,20 @@ export class GameComponent implements OnInit {
     if (this.game.gameStatus === 1)
     {
       const position =subfield.currentTarget.getAttribute('position');
-      this.game.setField(position, this.game.currentTurn!);
+     
+      
+      this.game.setField(position, this.game.currentTurn);
       const color = this.game.getPlayercolorClass();
       subfield.currentTarget.classList.add(color);
 
       
         await this.game.checkEndWinner().then( (end:boolean) =>{
           if(this.game.gameStatus == 0 && end){
-          const currentPlayer ="Current turn: Player:" +this.game.currentTurn;
+          const currentPlayer = "Current turn: Player:" +this.game.currentTurn;
           const information = document.querySelector('.current-status');
           
           information!.innerHTML = "The winner is PLAYER  " + this.game.currentTurn;
-        }
+         }
       });
 
       await this.game.checkGameEndFull().then( (end:boolean) =>{
